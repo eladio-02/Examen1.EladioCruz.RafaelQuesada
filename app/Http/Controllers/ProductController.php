@@ -36,7 +36,6 @@ class ProductController extends Controller
             'name' => $data['name'],
             'brand' => $data['brand'],
             'family' => $data['family'],
-
             'factory' => $data['factory'],
             'brand' => $data['brand'],
             'family' => $data['family'],
@@ -79,9 +78,9 @@ class ProductController extends Controller
      * @param  \App\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function edit()
+    public function edit($id)
     {
-        
+        /*
         $data = Input::all();
         Product::where('id', $data[id])
           ->update([
@@ -97,6 +96,10 @@ class ProductController extends Controller
             'tax' => $data['tax'],
         ]);
         return redirect('/home');
+        */
+        //$product = Product::find($id);
+        //return View::make('editproduct')->with('product', $product);
+        return view('/editproduct', ['product' => Product::find($id)] );
     }
 
     /**
@@ -106,9 +109,33 @@ class ProductController extends Controller
      * @param  \App\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Product $product)
+    public function update($id)
     {
-        //
+        $fecha = date("Y/m/d"); 
+
+        $data = Input::all();
+        $product = Product::find($id);
+        if(!is_null($product)){ 
+            $product->name = $data['name'];
+            $product->brand = $data['brand'];
+            $product->family = $data['family'];
+            $product->factory = $data['factory'];
+            $product->brand = $data['brand'];
+            $product->family = $data['family'];
+            $product->departamento = $data['departamento'];
+            $product->type = $data['type'];
+            $product->active = 1;
+            $product->unity = $data['unity'];
+            $product->tax = $data['tax'];
+            $product->date1 = $fecha;
+            $product->save();
+            return redirect('/home'); 
+        }
+        else{
+            return redirect('/clientes');
+        }
+        
+        
     }
 
     /**

@@ -44,6 +44,7 @@
                             <li><a href="{{ route('home') }}">Productos</a></li>
                             <li><a href="/users">Usuarios</a></li>
                             <li><a href="/clientes">Clientes</a></li>
+                            <li><a href="/stock">Inventario</a></li>
                                <!-- <li><a href="{{ route('login') }}">Login</a></li>
                                 <li><a href="{{ route('register') }}">Register</a></li>  -->
                         @endif

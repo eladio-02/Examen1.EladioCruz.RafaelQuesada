@@ -14,7 +14,7 @@
                 <th>Sexo</th>
                 <th>Descuento</th>
                 <th>Estado Civil</th>
-                <th>Ncimiento</th>
+                <th>Nacimiento</th>
                 
 
             </tr>

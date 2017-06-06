@@ -74,9 +74,9 @@ class UserController extends Controller
      * @param  \App\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function edit(User $user)
+    public function edit($id)
     {
-        //
+        return view('/edituser', ['user' => User::find($id)] );
     }
 
     /**
@@ -86,9 +86,30 @@ class UserController extends Controller
      * @param  \App\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, User $user)
+    public function update($id)
     {
-        //
+        
+        $fecha = date("Y/m/d");
+        $data = Input::all();
+        $user = User::find($id);
+        $tipo=0;
+        if($data['Tipo']=="Administrador"){
+            $tipo = 1;
+
+        }
+
+        if(!is_null($user)){ 
+            $user->username = $user->username;
+            $user->password = bcrypt($data['password']);
+            $user->type = $tipo;
+            
+            $user->save();
+            return redirect('/users'); 
+        }
+        else{
+            return redirect('/users');
+        }
+        return redirect('/users'); 
     }
 
     /**

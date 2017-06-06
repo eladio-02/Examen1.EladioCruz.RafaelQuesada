@@ -26,7 +26,9 @@ Route::post('/product/insert', 'ProductController@create');
 
 Route::get('/product/delete/{id}','ProductController@destroy');
 
-Route::get('/product/edit/{id}','ProductController@show');
+Route::get('/product/edit/{id}','ProductController@edit');
+Route::put('/product/edit/{id}','ProductController@update');
+
 
 Route::get('/product/edit/','ProductController@edit');
 
@@ -42,7 +44,9 @@ Route::post('/user/insert', 'UserController@create');
 
 Route::get('/user/delete/{id}','UserController@destroy');
 
-Route::get('/user/edit/{id}','UserController@show');
+Route::get('/user/edit/{id}','UserController@edit');
+
+Route::put('/user/edit/{id}','UserController@update');
 
 Route::get('/user/edit/','UserController@edit');
 
@@ -57,6 +61,21 @@ Route::post('/cliente/insert', 'ClienteController@create');
 
 Route::get('/cliente/delete/{id}','ClienteController@destroy');
 
-Route::get('/cliente/edit/{id}','ClienteController@show');
+Route::get('/cliente/edit/{id}','ClienteController@edit');
+Route::put('/cliente/edit/{id}','ClienteController@update');
 
 Route::get('/cliente/edit/','ClienteController@edit');
+
+/**************************************************
+            Stock
+***************************************************/
+Route::get('/stock', 'StockController@index');
+
+Route::get('/stock/create', 'StockController@createStockItem');
+
+Route::post('/stock/insert', 'StockController@create');
+
+Route::get('/stock/delete/{id}','StockController@destroy');
+
+Route::put('/stock/edit/{id}','StockController@update');
+Route::get('/stock/edit/{id}','StockController@edit');

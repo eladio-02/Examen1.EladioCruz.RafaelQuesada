@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Cliente;
+use App\Stock;
+use App\Stock_Movement;
+use App\Stock_Movement_Detail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 use DateTime;
 
-class ClienteController extends Controller
+class StockController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,7 +18,7 @@ class ClienteController extends Controller
      */
     public function index()
     {
-        return view('/cliente', ['clientes' => Cliente::all() ] );
+        return view('/stock', ['stock' => Stock::all() ] );
     }
 
     /**
@@ -24,38 +26,27 @@ class ClienteController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function createCliente()
+
+    public function createStockItem()
     {
-        return view('/newclient');
+        return view('/newstockitem');
     }
     public function create()
     {
-       $data = Input::all();
-       $sexo=0;
-       $status = 0;
+    	$data = Input::all();
+      
+        $fecha = date("Y/m/d");
        
-       $fecha = date("Y/m/d");
-       
-       /*if($data['Status']=="Soltero"){
-           $status = 1;
-       }
 
-       if($data['Tipo']=="Masculino"){
-           $sexo = 1;
-       }*/
-
-       Cliente::create([
-           'id' => $data['id'],
-           'name' => $data['name'],
-           'apellido' => $data['apellidos'],
-           'birthday' => $data['birthday'],
-           'status' => $data['Status'],
-           'sexo' => $data['Tipo'],
-           'active' => 1,
-           'discount' => $data['discount'],
+       Stock::create([
+           'product_id' => $data['product_id'],
+           'quantity' => $data['quantity'],
+           'min_quantity' => $data['min_quantity'],
+           'max_quantity' => $data['max_quantity'],
+           'gravado' => $data['gravado'],
            'date1' => $fecha,
        ]);
-       return redirect('/clientes');
+       return view('/stock', ['stock' => Stock::all() ] );
     }
 
     /**
@@ -66,7 +57,7 @@ class ClienteController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        
     }
 
     /**
@@ -88,7 +79,7 @@ class ClienteController extends Controller
      */
     public function edit($id)
     {
-        return view('/editclient', ['client' => Cliente::find($id)] );
+        return view('/editstock', ['stockItem' => Stock::find($id)] );
     }
 
     /**
@@ -100,25 +91,25 @@ class ClienteController extends Controller
      */
     public function update($id)
     {
+
+    	$data = Input::all();
+      
         $fecha = date("Y/m/d");
-        $data = Input::all();
-        $client = Cliente::find($id);
-        if(!is_null($client)){ 
-            $client->name = $data['name'];
-            $client->apellido = $data['apellidos'];
-            $client->birthday = $data['birthday'];
-            $client->status = $data['Status'];
-            $client->sexo = $data['Tipo'];
-            $client->active = 1;
-            $client->discount = $data['discount'];
-            $client->date1 = $fecha;
-            $client->save();
-            return redirect('/clientes'); 
+        $stock = Stock::find($id);
+        if(!is_null($stock)){ 
+            $stock->product_id = $stock->product_id;
+            $stock->quantity = $data['quantity'];
+            $stock->min_quantity = $data['min_quantity'];
+            $stock->max_quantity = $data['max_quantity'];
+            $stock->gravado = $data['gravado'];
+            $stock->date1 = $fecha;
+            $stock->save();
+            return redirect('/stock'); 
         }
         else{
-            return redirect('/clientes');
+            return redirect('/stock');
         }
-        return redirect('/clientes');
+        return redirect('/stock');
     }
 
     /**
@@ -128,8 +119,8 @@ class ClienteController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function destroy($id){
-        Cliente::where('id', $id)
-          ->update(['active' => 0]);
-        return redirect('/clientes');
+        $stock = Stock::find($id);
+        $stock->delete();
+        return redirect('/stock');
     }
 }

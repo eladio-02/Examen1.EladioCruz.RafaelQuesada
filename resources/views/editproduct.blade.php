@@ -2,20 +2,26 @@
 
 @section('content')
 <div class="container">
-        {!! Form::open(['url' => '/product/edit', 'class' => 'form-horizontal']) !!}
+
+
+
+
+
+        {{ Form::open(array('action' => array('ProductController@update', $product->id), 'method' => 'PUT', 'class' => 'form-horizontal')) }}
+
     
     <fieldset>
  
-        <legend>Edit Product</legend>
-            
-         
+        <legend>Edit {{$product->name}} {{$product->id}}</legend>
+
         <!-- Name -->
         <div class="form-group">
             {!! Form::label('name', 'Name:', ['class' => 'col-lg-2 control-label']) !!}
             <div class="col-lg-10">
-                {!! Form::text('name', $value = {{$producto->name}}, ['class' => 'form-control', 'placeholder' => 'Name']) !!}
+                {!! Form::text('name', $value = null, ['class' => 'form-control', 'placeholder' => 'Name']) !!}
             </div>
         </div>
+
 
         <!-- Brand -->
         <div class="form-group">
