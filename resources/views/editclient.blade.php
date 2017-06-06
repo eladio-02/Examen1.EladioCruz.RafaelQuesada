@@ -2,6 +2,11 @@
 
 @section('content')
 <div class="container">
+
+
+    @if (!Auth::user()->type==0)
+        
+
         {{ Form::open(array('action' => array('ClienteController@update', $client->id), 'method' => 'PUT', 'class' => 'form-horizontal')) }}
 
     
@@ -95,5 +100,6 @@
  
     {!! Form::close()  !!}
         
+        @endif
 </div>
 @endsection

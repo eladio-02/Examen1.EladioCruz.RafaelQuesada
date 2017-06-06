@@ -3,7 +3,7 @@
 @section('content')
 <div class="container">
 
-
+@if (!Auth::user()->type==0)
         {{ Form::open(array('action' => array('StockController@update', $stockItem->id), 'method' => 'PUT', 'class' => 'form-horizontal')) }}
     
     <fieldset>
@@ -54,7 +54,7 @@
     </fieldset>
  
     {!! Form::close()  !!}
-        
+        @endif
 </div>
 @endsection
    

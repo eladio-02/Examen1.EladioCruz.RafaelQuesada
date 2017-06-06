@@ -42,7 +42,9 @@
                     <ul class="nav navbar-nav navbar-left">
                         @if (!Auth::guest())
                             <li><a href="{{ route('home') }}">Productos</a></li>
+                            @if (!Auth::user()->type==0)
                             <li><a href="/users">Usuarios</a></li>
+                            @endif
                             <li><a href="/clientes">Clientes</a></li>
                             <li><a href="/stock">Inventario</a></li>
                                <!-- <li><a href="{{ route('login') }}">Login</a></li>

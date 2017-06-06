@@ -36,17 +36,23 @@ class StockController extends Controller
     	$data = Input::all();
       
         $fecha = date("Y/m/d");
-       
+        
 
-       Stock::create([
-           'product_id' => $data['product_id'],
+        Stock::create([
+            'product_id' => $data['product_id'],
            'quantity' => $data['quantity'],
            'min_quantity' => $data['min_quantity'],
            'max_quantity' => $data['max_quantity'],
            'gravado' => $data['gravado'],
            'date1' => $fecha,
-       ]);
-       return view('/stock', ['stock' => Stock::all() ] );
+        ]);
+
+        Stock_Movement::create([
+	           'product_id' => $data['product_id'],
+	           'new_quantity' => $data['quantity'],
+	           'date1' => $fecha,
+	        ]);
+        return view('/stock', ['stock' => Stock::all() ] );
     }
 
     /**
@@ -77,6 +83,41 @@ class StockController extends Controller
      * @param  \App\Cliente  $cliente
      * @return \Illuminate\Http\Response
      */
+
+    public function editQuantity($id)
+    {
+        return view('/addquantity', ['stockItem' => Stock::find($id)] );
+    }
+    public function updateQuantity($id)
+    {
+        $data = Input::all();
+        $fecha = date("Y/m/d");
+        $stock = Stock::find($id);
+        if(!is_null($stock)){ 
+
+        	Stock_Movement_Detail::create([
+	           'product_id' => $stock->product_id,
+	           'last_quantity' => $stock->quantity,
+	           'date1' => $fecha,
+	        ]);
+
+	        Stock_Movement::create([
+	           'product_id' => $stock->product_id,
+	           'new_quantity' => $stock->quantity + $data['quantity'],
+	           'date1' => $fecha,
+	        ]);
+
+        
+            $stock->quantity = $stock->quantity + $data['quantity'];
+            $stock->save();
+            return redirect('/stock'); 
+        }
+        else{
+            return redirect('/stock');
+        }
+        return redirect('/stock');
+    }
+
     public function edit($id)
     {
         return view('/editstock', ['stockItem' => Stock::find($id)] );

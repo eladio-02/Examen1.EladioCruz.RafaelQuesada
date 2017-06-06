@@ -4,7 +4,7 @@
 <div class="container">
         <button class="btn btn-info" 
                         onclick="location.href= '/stock/create' ">
-                        Add Product</button>
+                        Add Stock Item</button>
     
         <table class="table">
             <thead>
@@ -35,14 +35,17 @@
                     
 
                         <td>
-                                
+                                @if (!Auth::user()->type==0)
                             <button class="btn btn-danger" 
                             onclick="location.href= '/stock/delete/{{$stockItem->id}}' ">
-                            
                             Eliminar</button>
                                 
                                 <button onclick="location.href= '/stock/edit/{{$stockItem->id}}' " 
                                 class="btn btn-success">Editar</button>
+                                <button onclick="location.href= '/stock/editQuantity/{{$stockItem->id}}' " 
+                                class="btn btn-success">Agregar Cantidad</button>
+                                @endif
+                                
                         </td>
                     </tr>
             

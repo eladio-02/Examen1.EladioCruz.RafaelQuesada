@@ -13,7 +13,7 @@ class Stock_Movement_Detail extends Model
      *
      * @var string
      */
-    protected $table = 'stock';
+    protected $table = 'stock_movement_detail';
     public $timestamps = false;
 
     /**

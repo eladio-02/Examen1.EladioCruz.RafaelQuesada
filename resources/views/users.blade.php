@@ -2,6 +2,8 @@
 
 @section('content')
 <div class="container">
+
+@if (!Auth::user()->type==0)
         <button class="btn btn-info" 
                         onclick="location.href= '/user/create' ">
                         Añadir Usuario</button>
@@ -40,7 +42,7 @@
         @endforeach
         </tbody>
         </table>
-        
+        @endif
 </div>
 @endsection
    

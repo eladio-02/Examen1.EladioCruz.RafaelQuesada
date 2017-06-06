@@ -79,3 +79,6 @@ Route::get('/stock/delete/{id}','StockController@destroy');
 
 Route::put('/stock/edit/{id}','StockController@update');
 Route::get('/stock/edit/{id}','StockController@edit');
+
+Route::get('/stock/editQuantity/{id}','StockController@editQuantity');
+Route::put('/stock/updateQuantity/{id}','StockController@updateQuantity');

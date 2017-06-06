@@ -35,7 +35,7 @@
                     <td>{{$product->type}}</td>
                     <td>{{$product->departamento}}</td>
                         <td>
-                                
+                                @if (!Auth::user()->type==0)
                             <button class="btn btn-danger" 
                             onclick="location.href= '/product/delete/{{$product->id}}' ">
                             
@@ -43,6 +43,7 @@
                                 
                                 <button onclick="location.href= '/product/edit/{{$product->id}}' " 
                                 class="btn btn-success">Editar</button>
+                                @endif
                         </td>
                     </tr>
                 @endif

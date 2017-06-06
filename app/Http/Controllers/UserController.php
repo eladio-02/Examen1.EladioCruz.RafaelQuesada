@@ -32,6 +32,7 @@ class UserController extends Controller
     {
        $data = Input::all();
        $tipo=0;
+       error_log($data['Tipo']);
        if($data['Tipo']=="Administrador"){
            $tipo = 1;
 

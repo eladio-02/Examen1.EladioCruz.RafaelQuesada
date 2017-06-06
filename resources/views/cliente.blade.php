@@ -35,7 +35,7 @@
                     
 
                         <td>
-                                
+                                @if (!Auth::user()->type==0)
                             <button class="btn btn-danger" 
                             onclick="location.href= '/cliente/delete/{{$cliente->id}}' ">
                             
@@ -43,6 +43,7 @@
                                 
                                 <button onclick="location.href= '/cliente/edit/{{$cliente->id}}' " 
                                 class="btn btn-success">Editar</button>
+                                @endif
                         </td>
                     </tr>
                 @endif

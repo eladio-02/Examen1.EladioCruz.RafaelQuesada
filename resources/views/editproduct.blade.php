@@ -3,7 +3,7 @@
 @section('content')
 <div class="container">
 
-
+@if (!Auth::user()->type==0)
 
 
 
@@ -96,7 +96,7 @@
     </fieldset>
  
     {!! Form::close()  !!}
-        
+        @endif
 </div>
 @endsection
    

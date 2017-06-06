@@ -33,12 +33,12 @@
             <div class="col-lg-10">
                 <div class="radio">
                     {!! Form::label('radio1', 'Administrador') !!}
-                    {!! Form::radio('Tipo', 'option1', true, ['id' => 'Administrador']) !!}
+                    {!! Form::radio('Tipo', 'Administrador', true, ['id' => 'Administrador']) !!}
  
                 </div>
                 <div class="radio">
                     {!! Form::label('radio2', 'Usuario') !!}
-                    {!! Form::radio('Tipo', 'option2', false, ['id' => 'Usuario']) !!}
+                    {!! Form::radio('Tipo', 'Usuario', false, ['id' => 'Usuario']) !!}
                 </div>
             </div>
         </div>
